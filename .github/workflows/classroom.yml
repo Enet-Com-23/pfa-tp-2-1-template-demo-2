@@ -26,14 +26,14 @@ env:
   AVD_NAME: "test"
 
 jobs:
-  check-android-project:
-    name: Check Android Project
+  build:
+    name: Autograding
     runs-on: ubuntu-latest
     if: github.actor != 'github-classroom[bot]'
     steps:
-      #Get the code
+      # Get the code
       - uses: actions/checkout@v4
-
+            
       # Check if the application folder contains an Android project
       - name: Check for Android project
         run: |
@@ -49,15 +49,6 @@ jobs:
               echo "No Android project found"
               exit 1
           fi
-
-  build:
-    name: Autograding
-    runs-on: ubuntu-latest
-    if: github.actor != 'github-classroom[bot]'
-    needs: [check-android-project]
-    steps:
-      # Get the code
-      - uses: actions/checkout@v4
 
       # Enable KVM for emulator
       - name: Enable KVM
